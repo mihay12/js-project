@@ -1,3 +1,8 @@
+const millennia = document.querySelector('.millennia');
+const centuries = document.querySelector('.centuries');
+const years = document.querySelector('.years');
+const months = document.querySelector('.months');
+const weeks = document.querySelector('.weeks');
 const days = document.querySelector('.days');
 const hours = document.querySelector('.hours');
 const minutes = document.querySelector('.minutes');
@@ -8,7 +13,7 @@ const loading = document.querySelector('.loading');
 
 const currentYear = new Date().getFullYear();
 
-const newYearTime = new Date(`May 22 ${currentYear} 00:00:00`);
+const newYearTime = new Date(`May 22 ${currentYear + 70000} 00:00:00`);
 
 // Set background year
 year.innerText = currentYear;
@@ -18,17 +23,26 @@ function updateCountdown() {
   const currentTime = new Date();
   const diff = newYearTime - currentTime;
 
-  const w = Math.floor(diff / 1000 / 60 / 60 / 24);
-  const d = Math.floor(diff / 1000 / 60 / 60 / 24);
-  const h = Math.floor(diff / 1000 / 60 / 60) % 24;
-  const m = Math.floor(diff / 1000 / 60) % 60;
-  const s = Math.floor(diff / 1000) % 60;
+  const millenniumUpdate = Math.floor(diff / 1000 / 60 / 60 / 24 / 7 / 30 / 12 / 1000);
+  const centuryUpdate = Math.floor(diff / 1000 / 60 / 60 / 24 / 7 / 30 / 12 / 100);
+  const yearUpdate = Math.floor(diff / 1000 / 60 / 60 / 24 / 7 / 30 / 12);
+  const monthUpdate = Math.floor(diff / 1000 / 60 / 60 / 24 / 7 / 30);
+  const weekUpdate = Math.floor(diff / 1000 / 60 / 60 / 24 / 7);
+  const dayUpdate = Math.floor(diff / 1000 / 60 / 60 / 24);
+  const hourUpdate = Math.floor(diff / 1000 / 60 / 60) % 24;
+  const minuteUpdate = Math.floor(diff / 1000 / 60) % 60;
+  const secondUpdate = Math.floor(diff / 1000) % 60;
 
   // Add values to DOM
-  days.innerHTML = d;
-  hours.innerHTML = h < 10 ? '0' + h : h;
-  minutes.innerHTML = m < 10 ? '0' + m : m;
-  seconds.innerHTML = s < 10 ? '0' + s : s;
+  millennia.innerHTML = millenniumUpdate;
+  centuries.innerHTML = centuryUpdate;
+  years.innerHTML = yearUpdate;
+  months.innerHTML = monthUpdate;
+  weeks.innerHTML = weekUpdate;
+  days.innerHTML = dayUpdate;
+  hours.innerHTML = hourUpdate < 10 ? '0' + hourUpdate : hourUpdate;
+  minutes.innerHTML = minuteUpdate < 10 ? '0' + minuteUpdate : minuteUpdate;
+  seconds.innerHTML = secondUpdate < 10 ? '0' + secondUpdate : secondUpdate;
 }
 
 // Show spinner before countdown
